@@ -2,10 +2,10 @@
 #include <FirebaseArduino.h>
 
 #define FIREBASE_HOST "thrini-scitechchallenge2018.firebaseio.com"
-#define FIREBASE_AUTH "j1GmEA7VLaf4lZjrs8bxsZzQdw6pLXCEtB0fgaRa"
+#define FIREBASE_AUTH "-------FIREBASE_AUTH--------"
 
 #define WIFI_SSID "Elderly"
-#define WIFI_PASSWORD "85296602230"
+#define WIFI_PASSWORD "--------PASSWORD----------"
 
 #define LED 5
 #define MAGNET 4
