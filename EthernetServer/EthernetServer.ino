@@ -3,8 +3,8 @@
 
 byte mac[] = { 0xAB, 0xAA, 0x30, 0x20, 0x13, 0x33 };
 byte ip[] = { 192,168,1,20 };
-byte gateway[] = { 192,168,1,1 };
-byte subnet[] = { 255, 255, 255, 0 };
+byte gateway[] = { 192,168,1,111 };
+byte subnet[] = { 192,168,1,111 };
 
 EthernetServer server = EthernetServer(59998);
 
