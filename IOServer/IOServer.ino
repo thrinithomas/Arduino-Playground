@@ -1,10 +1,9 @@
 #include <SPI.h>
 #include <Ethernet.h>
 
-byte mac[] = { 0xAB, 0xAA, 0x30, 0x20, 0x13, 0x3A };
-byte ip[] = { 192, 168, 1, 10 };
-byte gateway[] = { 192, 168, 1, 1 };
-byte subnet[] = { 192, 168, 1, 111 };
+byte mac[] = { 0xF2, 0x70, 0xC9, 0x2F, 0x21, 0x25 }; byte ip[] = { 192, 168, 70, 249 };
+byte gateway[] = { 192, 168, 70, 1 };
+byte subnet[] = { 255, 255, 255, 0 };
 int errorLight = 7;
 int signalLight = 8;
 const String sign = "LIGHTUP";
@@ -12,6 +11,9 @@ const String sign = "LIGHTUP";
 EthernetServer server = EthernetServer(11378);
 EthernetClient clients[8];
 String messageBuffer = "";
+
+// non-block delay
+unsigned long delayStart = 0;
 
 void setup() {
   // put your setup code here, to run once:
@@ -32,13 +34,15 @@ void setup() {
 
   if(Ethernet.linkStatus() == LinkOFF) {
     Serial.println("Ethernet cable is not connected.");
-        while(true) {
+    while(true) {
       digitalWrite(errorLight, HIGH);
       delay(3000);
       digitalWrite(errorLight, LOW);
       delay(1000);
     }
   }
+
+  delayStart = millis();
 
   server.begin();
   Serial.println("Server Start...");
@@ -49,6 +53,17 @@ void setup() {
 
 void loop() {
   // put your main code here, to run repeatedly:
+
+  // This logic is to avoid any disconnect from client program
+  // that makes IO port always ON
+  if(((millis() - delayStart) >= 10000) && (digitalRead(signalLight) == HIGH)) {
+    digitalWrite(signalLight, LOW);
+    delayStart = millis(); // Reset Delay Start
+    Serial.println("IO Timeout");
+  } else {
+    //int nonTime = (millis() - delayStart);
+    //Serial.println("Debug: " + nonTime);
+  }
   
   EthernetClient newClient = server.accept();
    if(newClient) {
@@ -78,10 +93,11 @@ void loop() {
         } else {
           digitalWrite(signalLight, LOW);
         }
+        delayStart = millis();
         messageBuffer = "";
       } else {
         messageBuffer += thisChar;
       }
-  } 
+    } 
   }
 }
