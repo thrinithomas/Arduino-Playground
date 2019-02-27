@@ -1,4 +1,4 @@
-These IP is for Yuen Long Home for the Aged Blind
+These IP are for Yuen Long Home for the Aged Blind
 byte mac[] = { 0xF2, 0x70, 0xC9, 0x2F, 0x21, 0x25 }; byte ip[] = { 192, 168, 70, 249 };
 byte mac[] = { 0xEE, 0xEC, 0xDB, 0xB2, 0x18, 0xF9 }; byte ip[] = { 192, 168, 70, 248 };
 byte mac[] = { 0xE7, 0x65, 0xD5, 0x55, 0xBC, 0x76 }; byte ip[] = { 192, 168, 70, 247 };

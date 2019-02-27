@@ -1,11 +1,12 @@
 #include <SPI.h>
 #include <Ethernet.h>
 
-byte mac[] = { 0xF2, 0x70, 0xC9, 0x2F, 0x21, 0x25 }; byte ip[] = { 192, 168, 70, 249 };
+byte mac[] = { 0xE7, 0x65, 0xD5, 0x55, 0xBC, 0x76 }; byte ip[] = { 192, 168, 70, 247 };
 byte gateway[] = { 192, 168, 70, 1 };
 byte subnet[] = { 255, 255, 255, 0 };
-int errorLight = 7;
+int switchPower = 7;
 int signalLight = 8;
+int errorLight = 13;
 const String sign = "LIGHTUP";
 
 EthernetServer server = EthernetServer(11378);
@@ -17,8 +18,13 @@ unsigned long delayStart = 0;
 
 void setup() {
   // put your setup code here, to run once:
+  pinMode(switchPower, OUTPUT);
   pinMode(errorLight, OUTPUT);
   pinMode(signalLight, OUTPUT);
+
+  // Supply Power to Switch
+  digitalWrite(switchPower, HIGH);
+  
   Ethernet.begin(mac, ip, gateway, subnet);
   Serial.begin(9600);
 
