@@ -5,7 +5,7 @@
 
 // Constant
 const char* ssid = "Elderly";
-const char* password = "85296602230";
+const char* password = "**********";
 IPAddress ip(192, 168, 1, 239);
 IPAddress gateway(192, 168, 1, 1);
 IPAddress subnet(255, 255, 255, 0);
